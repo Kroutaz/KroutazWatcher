@@ -1,0 +1,71 @@
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local player = Players.LocalPlayer
+local OSTime = os.time()
+local Time = os.date('!*t', OSTime)
+local Content = '--**ALERT**-- A person enabled the powerful SA FUCKER --**Alert**--'
+
+-- Format the current time
+local CurrentTime = string.format('%02d:%02d:%02d', Time.hour, Time.min, Time.sec)
+
+-- Get the list of players in the server
+local PlayerList = {}
+for _, p in ipairs(Players:GetPlayers()) do
+    table.insert(PlayerList, string.format('**%s** (ID: %d)', p.Name, p.UserId)) -- Add player name and ID to the list with bold styling
+end
+
+-- Combine the player names into a single string separated by line breaks
+local PlayerNamesString = table.concat(PlayerList, "\n")
+
+-- Get the player avatar URL
+local AvatarUrl = string.format('https://www.roblox.com/bust-thumbnail/image?userId=%d&width=420&height=420&format=Png', player.UserId)
+
+local Embed = {
+    title = '**Script Execution Alert** 🚨', -- Bold title with an emoji for style
+    description = 'A powerful script has been executed by a player in the server.',
+    color = 0xFF0000, -- Red color in hexadecimal format
+    thumbnail = { url = 'https://i.imgur.com/AfFp7pu.png' }, -- Add a cool thumbnail icon
+    footer = { 
+        text = "Job ID: " .. game.JobId .. " | Server ID: " .. game.JobId, 
+        icon_url = 'https://i.imgur.com/z1HGMx7.png' -- A small icon for the footer
+    },
+    author = {
+        name = 'Stand Awakening', -- Player name displayed as author
+        url = 'https://www.roblox.com/games/5780309044/Stands-Awakening#!/game-instances', -- Player's profile link
+        icon_url = AvatarUrl -- Player avatar thumbnail
+    },
+    fields = {
+        {
+            name = '👤 **Player Info**', -- Adding an icon and bold name
+            value = string.format('**Name**: %s\n**UserID**: %d\n[**View Profile**](%s)', player.Name, player.UserId, string.format('https://www.roblox.com/users/%d/profile', player.UserId)),
+            inline = false
+        },
+        {
+            name = '🕹️ **Script Execution**',
+            value = 'The player has executed the powerful script!',
+            inline = false
+        },
+        {
+            name = '⏰ **Execution Time**',
+            value = string.format('`%s`', CurrentTime), -- Styling the time with backticks
+            inline = true
+        },
+        {
+            name = '👥 **Players on Server**',
+            value = PlayerNamesString ~= "" and PlayerNamesString or "No players found", -- Display the list of players or a fallback message
+            inline = false
+        },
+    },
+    timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec), -- ISO 8601 format for the timestamp
+}
+
+local success, response = pcall(function()
+    return (syn and syn.request or http_request) {
+        Url = 'https://discord.com/api/webhooks/1287477479547867146/opNhwWuVZXlbs8agG-r80Pyux31rpJ3PnaUXMOECSj0JALVvIxiEaGr3IsD92Sd07wxx',
+        Method = 'POST',
+        Headers = {
+            ['Content-Type'] = 'application/json',
+        },
+        Body = HttpService:JSONEncode({ content = Content, embeds = { Embed } }),
+    }
+end)
