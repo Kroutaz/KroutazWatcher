@@ -27,7 +27,7 @@ local Embed = {
     thumbnail = { url = 'https://i.imgur.com/AfFp7pu.png' }, -- Add a cool thumbnail icon
     footer = { 
         text = "Job ID: " .. game.JobId .. " | Server ID: " .. game.JobId, 
-        icon_url = 'https://i.imgur.com/z1HGMx7.png' -- A small icon for the footer
+        icon_url = 'https://imgs.search.brave.com/HAcZb6LDR5KIWiAouYP61hKemKsZmjhZgYtrib-b08s/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9lbW9q/aWdyYXBoLm9yZy9t/ZWRpYS9qb3lwaXhl/bHMvd2FybmluZ18y/NmEwLWZlMGYucG5n' -- A small icon for the footer
     },
     author = {
         name = 'Stand Awakening', -- Player name displayed as author
