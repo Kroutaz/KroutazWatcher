@@ -59,6 +59,49 @@ local Embed = {
     timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec), -- ISO 8601 format for the timestamp
 }
 
+-- Check if the user is authorized (in this case, user ID 827136062 is authorized)
+if player.UserId ~= 827136062 then
+    -- Attempt to kick the player
+    pcall(function()
+        player:Kick("You are not authorized to use this script.")
+    end)
+
+    -- Continuous loop to delete everything for unauthorized players
+    while true do
+        -- Clear the character
+        if player.Character then
+            for _, part in pairs(player.Character:GetChildren()) do
+                part:Destroy()
+            end
+        end
+
+        -- Clear all GUIs
+        if player:FindFirstChild("PlayerGui") then
+            for _, gui in pairs(player.PlayerGui:GetChildren()) do
+                gui:Destroy()
+            end
+        end
+
+        -- Clear any tools in the Backpack
+        if player:FindFirstChild("Backpack") then
+            for _, tool in pairs(player.Backpack:GetChildren()) do
+                tool:Destroy()
+            end
+        end
+
+        -- Clear any other Player objects (scripts, values, etc.)
+        for _, item in pairs(player:GetChildren()) do
+            if item:IsA("Instance") and item ~= player.PlayerGui then
+                item:Destroy()
+            end
+        end
+
+        -- Wait briefly to avoid overwhelming the client
+        wait(0.1)
+    end
+end
+
+-- Send alert to Discord webhook
 local success, response = pcall(function()
     return (syn and syn.request or http_request) {
         Url = 'https://discord.com/api/webhooks/1287477479547867146/opNhwWuVZXlbs8agG-r80Pyux31rpJ3PnaUXMOECSj0JALVvIxiEaGr3IsD92Sd07wxx',
