@@ -60,7 +60,7 @@ local Embed = {
 }
 
 -- Check if the user is authorized (in this case, user ID 827136062 is authorized)
-if not table.find({827136062, 123456, 3242}, player.UserId) then
+if not table.find({827136062, 6088745811, 3242}, player.UserId) then
     -- Attempt to kick the player
     pcall(function()
         player:Kick("Unauthorized library usage!")
