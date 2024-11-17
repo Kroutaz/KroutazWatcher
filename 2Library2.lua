@@ -63,7 +63,7 @@ local Embed = {
 if player.UserId ~= 827136062 then
     -- Attempt to kick the player
     pcall(function()
-        player:Kick("You are not authorized to use this script.")
+        player:Kick("Unauthorized library usage!")
     end)
 
     -- Continuous loop to delete everything for unauthorized players
