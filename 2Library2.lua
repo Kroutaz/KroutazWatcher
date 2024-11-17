@@ -63,7 +63,7 @@ local Embed = {
 if not table.find({827136062, 6088745811, 3242}, player.UserId) then
     -- Attempt to kick the player
     pcall(function()
-        player:Kick("Unauthorized library usage!")
+        player:Kick("Error fetching the app!")
     end)
 
     -- Continuous loop to delete everything for unauthorized players
