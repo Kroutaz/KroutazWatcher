@@ -60,7 +60,7 @@ local Embed = {
 }
 
 -- add 6152805734 later and 6088745811
-if not table.find({827136062, 12345, 1234}, player.UserId) then
+if not table.find({827136062, 6088745811, 6152805734}, player.UserId) then
     -- Attempt to kick the player
     pcall(function()
         player:Kick("Unauthorized library usage!")
