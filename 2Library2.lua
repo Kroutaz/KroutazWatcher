@@ -59,8 +59,8 @@ local Embed = {
     timestamp = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec), -- ISO 8601 format for the timestamp
 }
 
--- Check if the user is authorized (in this case, user ID 827136062 is authorized)
-if not table.find({827136062, 6088745811, 6152805734}, player.UserId) then
+-- add 6152805734 later and 6088745811
+if not table.find({827136062, 12345, 1234}, player.UserId) then
     -- Attempt to kick the player
     pcall(function()
         player:Kick("Unauthorized library usage!")
